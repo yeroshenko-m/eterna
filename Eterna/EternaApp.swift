@@ -5,7 +5,6 @@
 //  Author:  Mykhailo Yeroshenko
 //  Created: 07.12.2022
 //
-    
 
 import SwiftUI
 

@@ -11,6 +11,7 @@
 		2C710973294138A90083A073 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C710972294138A90083A073 /* ContentView.swift */; };
 		2C710975294138AA0083A073 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C710974294138AA0083A073 /* Assets.xcassets */; };
 		2C710978294138AA0083A073 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C710977294138AA0083A073 /* Preview Assets.xcassets */; };
+		2C71097F29413CA20083A073 /* StorgeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C71097E29413CA20083A073 /* StorgeType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +20,7 @@
 		2C710972294138A90083A073 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		2C710974294138AA0083A073 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2C710977294138AA0083A073 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		2C71097E29413CA20083A073 /* StorgeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorgeType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +54,7 @@
 			isa = PBXGroup;
 			children = (
 				2C710970294138A90083A073 /* EternaApp.swift */,
+				2C71097E29413CA20083A073 /* StorgeType.swift */,
 				2C710972294138A90083A073 /* ContentView.swift */,
 				2C710974294138AA0083A073 /* Assets.xcassets */,
 				2C710976294138AA0083A073 /* Preview Content */,
@@ -75,6 +78,8 @@
 			buildConfigurationList = 2C71097B294138AA0083A073 /* Build configuration list for PBXNativeTarget "Eterna" */;
 			buildPhases = (
 				2C710969294138A90083A073 /* Sources */,
+				2CC26E76294477CC00985D29 /* SwiftLint */,
+				2CC26E772944787800985D29 /* SwiftFormat */,
 				2C71096A294138A90083A073 /* Frameworks */,
 				2C71096B294138A90083A073 /* Resources */,
 			);
@@ -111,6 +116,8 @@
 				Base,
 			);
 			mainGroup = 2C710964294138A90083A073;
+			packageReferences = (
+			);
 			productRefGroup = 2C71096E294138A90083A073 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -132,6 +139,47 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		2CC26E76294477CC00985D29 /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\n\nif which swiftlint > /dev/null; then\n    swiftlint lint --fix \n    swiftlint lint --strict\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+		2CC26E772944787800985D29 /* SwiftFormat */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftFormat;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "alias swiftformat=\"/opt/homebrew/bin/swiftformat\"\n\n#if swiftformat >/dev/null; then\n#    echo \"HOLE\"\n#  swiftformat\n#else\n#  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\n#  exit 1\n#fi\n\nfor fileName in $({ git diff --name-only ; git diff --name-only --staged ; } | sort | uniq | egrep '\\.swift$')\ndo\n#Get the root folder of the project\nprojectDir=`git rev-parse --show-toplevel`\n#Get the full filepath of particular file to check\nresult=\"${projectDir}/${fileName}\"\n# run swiftFormat for particular file\n\nif test -f \"$result\"; then\n    swiftformat $result\nelse\n    echo \"SwiftFormat: file is deleted\"\nfi\ndone\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		2C710969294138A90083A073 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -139,6 +187,7 @@
 			files = (
 				2C710973294138A90083A073 /* ContentView.swift in Sources */,
 				2C710971294138A90083A073 /* EternaApp.swift in Sources */,
+				2C71097F29413CA20083A073 /* StorgeType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

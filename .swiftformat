@@ -1,0 +1,10 @@
+# file options
+
+# rules
+
+--disable wrapMultilineStatementBraces
+--exclude **/*+Generated.swift
+
+# format options
+
+--commas inline
